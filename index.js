@@ -14,7 +14,18 @@ io.on("connection", (socket) => {
 
     socket.on("disconnect", () => {
         console.log("Ngat ket noi", socket.id)
-    });//Suw kien ngat ket noi
+    });//Su kien ngat ket noi
+
+    socket.on("Client-send-data", (data) => {
+        console.log(socket.id + " vừa gửi: " + data);
+        //server gui lại thông báo cho tất cả hệ thống
+        //io.sockets.emit("Server-send-data", data + "888");
+        //server gui lại thông báo cho nguoi gui thong bao
+        // socket.emit("Server-send-data", data + "888");
+
+        //server chỉ trả thông báo cho tất cả người khác trừ người gửi thông báo
+        socket.broadcast.emit("Server-send-data", data + "888");
+    }); //Bắt sự kiện emit phía client
 });//su kien lang nghe
 
 app.get("/", (req, res) => {

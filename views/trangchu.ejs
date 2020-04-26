@@ -6,13 +6,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
+        <div id="mrA">Click send</div>
+        <h2 id="noidung"></h2>
         <script src="jquery-3.5.0.min.js"></script>
         <script src="socket.io/socket.io.js"></script>
         <script>
             //Goi dien len server
             var socket = io("http://localhost:3000");
+
+            socket.on("Server-send-data", (data) => {
+                $("#noidung").append(data + ",");
+            });
             $(document).ready(()=>{
-                
+                $("#mrA").click(()=>{
+                    socket.emit("Client-send-data", "Hello");//gui du lieu len server. Gồm 2 tham số: thứ 1: tên emit lên, thứ 2: tham số truyền
+                })
             })
         </script>
     </body>
