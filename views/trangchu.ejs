@@ -1,27 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Demo Socket IO</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-        <div id="mrA">Click send</div>
-        <h2 id="noidung"></h2>
-        <script src="jquery-3.5.0.min.js"></script>
-        <script src="socket.io/socket.io.js"></script>
-        <script>
-            //Goi dien len server
-            var socket = io("http://localhost:3000");
 
-            socket.on("Server-send-data", (data) => {
-                $("#noidung").append(data + ",");
-            });
-            $(document).ready(()=>{
-                $("#mrA").click(()=>{
-                    socket.emit("Client-send-data", "Hello");//gui du lieu len server. Gồm 2 tham số: thứ 1: tên emit lên, thứ 2: tham số truyền
-                })
-            })
-        </script>
-    </body>
+<head>
+    <title>Demo Socket IO</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="loginForm">
+            <h3>What's your name?</h3>
+            <input type="text" id="txtUsername">
+            <input type="button" value="Register" id="btnRegister">
+        </div>
+    </div>
+
+    <div id="chatForm">
+        <div id="left">
+            <div id="boxTitle">Users Online</div>
+            <div id="boxContent">
+                <!-- <div class="user-online">Teo Nguyen</div> -->
+            </div>
+        </div>
+
+        <div id="right">
+            <div id="sayHi">
+                Hello <span id="currentUser">Teo</span>
+                <input type="button" id="btnLogOut" value="Logout">
+            </div>
+
+            <div id="listMessage"></div>
+            <div id="thongbao"></div>
+
+            <input type="text" id="txtMessage">
+            <input type="button" id="btnSendMessage" value="Send">
+        </div>
+    </div>
+
+    <!--<div id="mrA">Click send</div>
+        <h2 id="noidung"></h2>-->
+    <script src="jquery-3.5.0.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="xuly.js"></script>
+</body>
+
 </html>
